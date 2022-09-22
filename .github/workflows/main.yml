@@ -1,0 +1,29 @@
+name: Build Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build
+        run: |
+          npm install --production
+          npm run build
+
+      - name: Zip
+        run: |
+          mv build simply-portraits
+          zip -r module simply-portraits
+
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.14
+        with:
+          files: |
+            module.zip
+            src/module.json
