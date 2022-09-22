@@ -29,6 +29,7 @@ Hooks.on(
 
     const img = createImgElement(imgSrc);
     header.prepend(img);
+    header.style.paddingBottom = "3px";
 
     const sender = html.find('.message-sender')?.[0]
     if (!sender)

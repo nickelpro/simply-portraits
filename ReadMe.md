@@ -1,4 +1,8 @@
-# Simply Portraits: No-nonsense Chat Portraits for Foundry VTT
+# Simply Portraits
+
+![Screenshot](assets/screenshot.webp)
+
+## No-nonsense Chat Portraits for Foundry VTT
 
 There are a couple mods that add chat portraits to chat messages in FVTT.
 Typically they come with lots of options. This mod has no options.
