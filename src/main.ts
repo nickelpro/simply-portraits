@@ -1,8 +1,32 @@
+import { registerSettings } from "./settings.js"
+
 function createImgElement(imgSrc: string): HTMLImageElement {
   const img: HTMLImageElement = document.createElement("img");
+  const size = game.settings.get('simply-portraits', 'size')
   img.src = imgSrc;
+  img.width = size;
+  img.height = size;
   img.classList.add('simply-portraits');
   return img;
+}
+
+function createVideoElement(videoSrc: string): HTMLVideoElement {
+  const video = document.createElement('video');
+  const size = game.settings.get('simply-portraits', 'size')
+  video.src = videoSrc;
+  video.width = size;
+  video.height = size;
+  video.autoplay = false;
+  video.controls = false;
+  video.muted = true;
+  video.classList.add('simply-portraits');
+  return video;
+}
+
+function isVideo(imgSrc: string): boolean {
+  const re = /(?:\.([^.]+))?$/;
+  const ext = re.exec(imgSrc)?.[1];
+  return ext === "webm";
 }
 
 function getTokenSrc(message: ChatMessage): string | null {
@@ -12,21 +36,7 @@ function getTokenSrc(message: ChatMessage): string | null {
   return token?.texture?.src;
 }
 
-function isVideo(imgSrc: string): boolean {
-  const re = /(?:\.([^.]+))?$/;
-  const ext = re.exec(imgSrc)?.[1];
-  return ext === "webm";
-}
-
-function createVideoElement(videoSrc: string): HTMLVideoElement {
-  const video = document.createElement('video');
-  video.src = videoSrc;
-  video.autoplay = false;
-  video.controls = false;
-  video.muted = true;
-  video.classList.add('simply-portraits');
-  return video;
-}
+Hooks.on("init", registerSettings)
 
 Hooks.on(
   "preCreateChatMessage",
