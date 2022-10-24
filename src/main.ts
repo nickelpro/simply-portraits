@@ -7,8 +7,9 @@ function createImgElement(imgSrc: string): HTMLImageElement {
 
 function getTokenSrc(message: ChatMessage): string | null {
   const speaker = message.speaker;
-  const actor = game.actors.get(speaker.actor);
-  return actor?.prototypeToken?.texture?.src;
+  const scene = game.scenes.get(speaker.scene);
+  const token = scene.tokens.get(speaker.token);
+  return token?.texture?.src;
 }
 
 function isVideo(imgSrc: string): boolean {
@@ -28,9 +29,24 @@ function createVideoElement(videoSrc: string): HTMLVideoElement {
 }
 
 Hooks.on(
+  "preCreateChatMessage",
+  (message: ChatMessage, options: any, render: any, userId: string) => {
+    const src = getTokenSrc(message);
+    if (src)
+      message.updateSource({
+        flags: {
+          'simply-portraits': {
+            src: src
+          }
+        }
+      });
+  }
+);
+
+Hooks.on(
   "renderChatMessage", (message, html, data) => {
     const header = html.find('.message-header')?.[0];
-    const src = getTokenSrc(message);
+    const src = message.flags?.['simply-portraits']?.src;
 
     if (!header || !src)
       return;
@@ -44,4 +60,4 @@ Hooks.on(
       return;
     sender.style.alignSelf = 'center';
   }
-)
+);
