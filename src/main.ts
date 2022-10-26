@@ -2,7 +2,7 @@ import { registerSettings } from "./settings.js"
 
 function createImgElement(imgSrc: string): HTMLImageElement {
   const img: HTMLImageElement = document.createElement("img");
-  const size = game.settings.get('simply-portraits', 'size')
+  const size = game.settings.get('simply-portraits', 'size');
   img.src = imgSrc;
   img.width = size;
   img.height = size;
@@ -12,7 +12,7 @@ function createImgElement(imgSrc: string): HTMLImageElement {
 
 function createVideoElement(videoSrc: string): HTMLVideoElement {
   const video = document.createElement('video');
-  const size = game.settings.get('simply-portraits', 'size')
+  const size = game.settings.get('simply-portraits', 'size');
   video.src = videoSrc;
   video.width = size;
   video.height = size;
@@ -32,7 +32,7 @@ function isVideo(imgSrc: string): boolean {
 function getTokenSrc(message: ChatMessage): string | null {
   const speaker = message.speaker;
   const scene = game.scenes.get(speaker.scene);
-  const token = scene.tokens.get(speaker.token);
+  const token = scene?.tokens.get(speaker.token);
   return token?.texture?.src;
 }
 
@@ -63,7 +63,7 @@ Hooks.on(
 
     const portrait = isVideo(src) ? createVideoElement(src) : createImgElement(src);
     header.prepend(portrait);
-    header.style.paddingBottom = '3px'
+    header.style.paddingBottom = '3px';
 
     const sender = html.find('.message-sender')?.[0];
     if (!sender)
