@@ -36,7 +36,7 @@ function getTokenSrc(message: ChatMessage): string | null {
   return token?.texture?.src;
 }
 
-Hooks.on("init", registerSettings)
+Hooks.on("init", registerSettings);
 
 Hooks.on(
   "preCreateChatMessage",
