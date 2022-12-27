@@ -11,7 +11,7 @@
       "github": "nickelpro"
     }
   ],
-  "version": "1.2.2",
+  "version": "1.2.3",
   "compatibility": {
     "minimum": "10",
     "verified": "10"
@@ -24,5 +24,5 @@
   ],
   "manifest": "https://github.com/nickelpro/simply-portraits/releases/latest/download/module.json",
   "download": "https://github.com/nickelpro/simply-portraits/releases/latest/download/module.zip",
-  "readme": "https://github.com/nickelpro/simply-portraits/blob/v1.2.2/ReadMe.md"
+  "readme": "https://github.com/nickelpro/simply-portraits/blob/v1.2.3/ReadMe.md"
 }

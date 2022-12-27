@@ -1,6 +1,6 @@
 {
   "name": "simply-portraits",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A bare bones module for adding portraits to chat messages.",
   "main": "main.js",
   "type": "module",

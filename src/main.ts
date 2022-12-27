@@ -29,11 +29,22 @@ function isVideo(imgSrc: string): boolean {
   return ext === "webm";
 }
 
-function getTokenSrc(message: ChatMessage): string | null {
-  const speaker = message.speaker;
+function getTokenSrc(speaker: any): string | null {
   const scene = game.scenes.get(speaker.scene);
   const token = scene?.tokens.get(speaker.token);
   return token?.texture?.src;
+}
+
+function getPrototypeSrc(speaker: any): string | null {
+  const actor = game.actors.get(speaker.actor);
+  return actor?.prototypeToken?.texture?.src;
+}
+
+function getSrc(message: ChatMessage): string | null {
+  const speaker = message.speaker;
+  if (speaker.token)
+    return getTokenSrc(speaker);
+  return getPrototypeSrc(speaker);
 }
 
 Hooks.on("init", registerSettings);
@@ -41,7 +52,7 @@ Hooks.on("init", registerSettings);
 Hooks.on(
   "preCreateChatMessage",
   (message: ChatMessage, options: any, render: any, userId: string) => {
-    const src = getTokenSrc(message);
+    const src = getSrc(message);
     if (src)
       message.updateSource({
         flags: {
