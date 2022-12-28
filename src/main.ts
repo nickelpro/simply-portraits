@@ -37,7 +37,10 @@ function getTokenSrc(speaker: any): string | null {
 
 function getPrototypeSrc(speaker: any): string | null {
   const actor = game.actors.get(speaker.actor);
-  return actor?.prototypeToken?.texture?.src;
+  const token = actor?.prototypeToken;
+  if (token?.randomImg)
+    return null;
+  return token?.texture?.src;
 }
 
 function getSrc(message: ChatMessage): string | null {
